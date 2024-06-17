@@ -20,12 +20,12 @@ let list =<%- JSON.stringify(list)%>;
         </div>
     <% if(currUser) {%>
     <div class="show-btns mt-3">
-        <a href="http://localhost:8080/listing/<%= list._id %>/edit" class="btn add-btn"> Edit listing</a>
+        <a href="/listing/<%= list._id %>/edit" class="btn add-btn"> Edit listing</a>
         <form method="POST" action="/listing/<%= list._id %>?_method=DELETE">
             <button type="submit" class="btn btn-dark">Delete listing</button>
         </form>
         <% } %>
-        <a href="http://localhost:8080/listing/" class="btn btn-secondary"> Back to Home</a>
+        <a href="/listing" class="btn btn-secondary"> Back to Home</a>
     </div>
     <hr>
     <% if(currUser) {%>

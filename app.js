@@ -20,8 +20,6 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require("./models/user.js");
 
-
-// const MongoUrl = "mongodb://127.0.0.1:27017/wanderlust";
 const dbUrl = process.env.ATLAS_URL;
 
 main().then(()=>{
@@ -80,18 +78,6 @@ app.listen(port,()=>{
     console.log(`App is listen on port ${port}`);
 });
 
-// app.get("/",(req,res)=>{
-//     res.send("Root Path");
-// });
-
-// app.get("/register", async(req, res) => {
-//   let fakeUser = new User({
-//     email:"user@gmail.com",
-//     username:"fakeuser",
-//   });
-//   let registerUser = await (User.register(fakeUser, "123456"));
-//   res.send(registerUser);
-// });
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");      
   res.locals.error = req.flash("error");
