@@ -50,11 +50,14 @@ module.exports.postNew = async (req, res) => {
     })
     .send();
   const newList = new Listing(req.body.listing);
-  if (req.file.path) {
-    const url = req.file.path;
-    const pathname = req.file.filename;
+
+  if (req.file) {
+    console.log(req.file);
+     const url = req.file.path;
+    const pathname = req.file.filename; 
     newList.image = { url, pathname };
   };
+
   newList.owner = req.user._id;
   newList.geometry = response.body.features[0].geometry;
   await newList.save();
