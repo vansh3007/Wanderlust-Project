@@ -43,24 +43,23 @@ module.exports.getShow = async (req, res) => {
 };
 
 module.exports.postNew = async (req, res) => {
-let response= await geocodingClient
-  .forwardGeocode({
-    query: req.body.listing.location,
-    limit: 2,
-  })
-    .send()
+  let response = await geocodingClient
+    .forwardGeocode({
+      query: req.body.listing.location,
+      limit: 2,
+    })
+    .send();
+  const newList = new Listing(req.body.listing);
   if (req.file.path) {
     const url = req.file.path;
     const pathname = req.file.filename;
     newList.image = { url, pathname };
-    }
-  
-  const newList = new Listing(req.body.listing);
+  };
   newList.owner = req.user._id;
   newList.geometry = response.body.features[0].geometry;
   await newList.save();
   req.flash("success", "New Listing Created");
-  res.redirect("http://localhost:8080/listing");
+  res.redirect("/listing");
 };
 
 module.exports.putEdit = async (req, res) => {
