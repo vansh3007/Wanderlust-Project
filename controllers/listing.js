@@ -49,12 +49,14 @@ let response= await geocodingClient
     limit: 2,
   })
     .send()
-
-  const url= req.file.path;
-  const pathname = req.file.filename;
+  if (req.file.path) {
+    const url = req.file.path;
+    const pathname = req.file.filename;
+    newList.image = { url, pathname };
+    }
+  
   const newList = new Listing(req.body.listing);
   newList.owner = req.user._id;
-  newList.image = { url, pathname };
   newList.geometry = response.body.features[0].geometry;
   await newList.save();
   req.flash("success", "New Listing Created");
