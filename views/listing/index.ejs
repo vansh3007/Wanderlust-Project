@@ -1,0 +1,101 @@
+<% layout('/layouts/boilerplate') -%>
+
+<body>
+  <div id="filters">
+    <a href="/listing/filter?q=All">
+      <div class="filter">
+        <div><i class="fa-solid fa-globe"></i></div>
+        <p>All</p>
+      </div>
+    </a>
+    <a href="/listing/filter?q=Tranding">
+      <div class="filter">
+        <div><i class="fa-solid fa-fire"></i></div>
+        <p>Tranding</p>
+      </div>
+    </a>
+    <a href="/listing/filter?q=Iconic">
+      <div class="filter">
+        <div><i class="fa-solid fa-ticket"></i></div>
+        <p>Iconic</p>
+      </div>
+    </a>
+    <a href="/listing/filter?q=Amazing+Pool">
+      <div class="filter">
+        <div><i class="fa-solid fa-person-swimming"></i></div>
+        <p>Amazing Pool</p>
+      </div>
+    </a>
+    <a href="/listing/filter?q=Beach">
+      <div class="filter">
+        <div><i class="fa-solid fa-umbrella-beach"></i></div>
+        <p>Beach</p>
+      </div>
+    </a>
+    <a href="/listing/filter?q=Mountain">
+      <div class="filter">
+        <div><i class="fa-solid fa-mountain"></i></div>
+        <p>Mountain</p>
+      </div>
+    </a>
+    <a href="/listing/filter?q=Tropical">
+      <div class="filter">
+        <div><i class="fa-solid fa-tree"></i></div>
+        <p>Tropical</p>
+      </div>
+    </a>
+    <a href="/listing/filter?q=Rooms">
+      <div class="filter">
+        <div><i class="fa-solid fa-bed"></i></div>
+        <p>Rooms</p>
+      </div>
+    </a>
+    <a href="/listing/filter?q=Boats">
+      <div class="filter">
+        <div><i class="fa-solid fa-sailboat"></i></div>
+        <p>Boats</p>
+      </div>
+    </a>
+    <div class="tax-toggle">
+      <div class="form-check-reverse form-switch">
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Display Total after Taxes</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+    <% for (let list of listing) {%>
+      <a href="/listing/<%= list._id %>" class="listing_link">
+      <div class="card col">
+        <img src="<%= list.image.url %>" class="card-img-top" alt="listing-img" style="height: 20rem;">
+        <div class="card-img-overlay"></div>
+        <div class="card-body">
+          <p class="card-text">
+            <b><%= list.title %></b> <br>
+            &#8377;<%= list.price.toLocaleString("en-IN") %>/night
+            <i class="tax-info">+18% GST</i>
+          </p>
+        </div>
+      </div>
+    </a>
+    <% } %>
+  </div>
+
+  <script>
+    let taxbutton=document.getElementById("flexSwitchCheckDefault");
+    taxbutton.addEventListener("change",()=>{
+      let taxInfo=document.getElementsByClassName("tax-info");
+      for(tax of taxInfo){
+        if(tax.style.display=="inline"){
+          tax.style.display="none";
+        }
+        else{
+          tax.style.display="inline";
+        }
+      }
+        
+      })
+  </script>
+</body>
+
